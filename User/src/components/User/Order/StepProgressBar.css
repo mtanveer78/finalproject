@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+.progresses {
+  display: flex;
+  align-items: center;
+  padding-left: 300px;
+  margin-top: 75px;
+}
+
+.line {
+  width: 200px;
+  height: 6px;
+  background-color: black;
+}
+.checked {
+  background-color: #63d19e !important;
+}
+.steps {
+  display: flex;
+  background-color: black;
+  color: #fff;
+  font-size: 14px;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
