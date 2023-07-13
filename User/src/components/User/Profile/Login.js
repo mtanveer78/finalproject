@@ -1,34 +1,40 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Userlayout from '../Userlayout/Userlayout';
+import { useCookies } from 'react-cookie';
+import swal from 'sweetalert';
 
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ email: "", password: "" })
+  const [cookies, setCookie] = useCookies(['token']);
   let history = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email: credentials.email, password: credentials.password })
-    });
-    const json = await response.json()
-    // console.log(json);
-    if (json.success) {
-      // Save the auth token and redirect
-      localStorage.setItem('token', json.authtoken);
-      console.log(localStorage.getItem("token"))
-      history("/"); 
-      window.location.reload();
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: credentials.email, password: credentials.password })
+      });
+      const data = await response.json()
+      if (data.success) {
+        // Save the auth token and redirect
+        setCookie('token', data.authtoken, { maxAge: 3600 });
 
+        swal('Login Success!', 'You have been successfully logged in!', 'success').then(() => {
+          history('/');
+        });
+      } else {
+        swal('Login Failed!', 'Please check your email and password!', 'error');
+      }
+    } catch (err) {
+      swal('Internal Error!', 'Error occur!', 'error');
     }
-    else {
-      // props.showAlert("Invalid Details", "danger");
-    }
+
   }
 
   const onChange = (e) => {

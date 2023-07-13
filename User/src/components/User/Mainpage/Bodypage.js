@@ -14,6 +14,7 @@ import 'react-gallery-carousel/dist/index.css';
 const Bodypage = () => {
 	const context = useContext(ProductContext);
 	const { category, getCategory } = context;
+
 	const images = [
 		{
 			src: "assets/images/main-slider-1-1.jpg"
@@ -37,8 +38,11 @@ const Bodypage = () => {
 		<div>
 			<Userlayout>
 				
-				<div className="header-nav-section">
-					<div className="container margn">
+				
+				<main id="main">
+					<div className="container">
+					<div className="header-nav-section">
+					<div style={{marginLeft:'8%'}}>
 						<ul className="nav menu-nav clone-main-menu" id="mercado_haead_menu" data-menuname="Sale Info" >
 							<li className="menu-item nav-item"><Link to="/" className="link-term ml-3">Weekly Featured</Link> </li>
 							<li className="menu-item nav-item"><Link to="/" className="link-term">Hot Sale items</Link> </li>
@@ -48,15 +52,13 @@ const Bodypage = () => {
 						</ul>
 					</div>
 				</div>
-				<main id="main">
-					<div className="container">
 						<Carousel images={images} hasThumbnails={false} hasSizeButton={false} hasMediaButton={false} hasIndexBoard={false} isAutoPlaying={true} autoPlayInterval={5000} />
 						<Onsales />
 							<div className="mb-3">
 								<h3 className="category-heading">Categories</h3>
-								{category?.map(category => {
+								{category?.map((category,index) => {
 									return (
-										<Catagorycard category={category} page="bodypage" />
+										<Catagorycard category={category} page="bodypage" index={index} />
 									);
 								})}
 							</div>

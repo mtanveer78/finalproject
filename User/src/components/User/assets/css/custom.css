@@ -541,9 +541,16 @@ body {
 .product-rate{
   width: 400px;
 }
+.text_overflow {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  text-overflow: ellipsis;
+}
 
-
-
+.wrap-logo-top{
+  width: 200px !important;
+}
 
 
 /* ... rest of your CSS styles ... */
@@ -587,14 +594,23 @@ body {
 }
 
 /* Medium screens (between 577px and 992px) */
-@media (min-width: 577px) and (max-width: 992px) {
+@media (min-width: 577px) and (max-width: 1020px) {
   .container {
     width: 100%;
   }
+  .main-productcard{
+    width: 186px !important;
+    height: 450px;
+  }
+ 
 
   /* Adjust other styles for medium screens */
 }
-
+@media (max-width: 1500px) {
+  .sidebar {
+    display: none;
+  }
+}
 /* Large screens (above 992px) */
 @media (min-width: 993px) {
   /* Adjust styles for large screens here */

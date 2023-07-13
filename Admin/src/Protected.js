@@ -11,8 +11,7 @@ export const ProtectedRoute = ({ children }) => {
 }
 
 export const PublicRoute = ({ children }) => {
-  const [cookies, setCookie] = useCookies(['token']);
-  const user = cookies.token
+  const user = localStorage.getItem('token')
   if (!user) {
     return children
   }

@@ -11,8 +11,7 @@ function Addcategory() {
   const { Addcategory } = context;
   const [category, setCategory] = useState({ name: "", slug: "", description: "", meta_description: "", meta_title: "", images: [] })
   let history = useNavigate();
-
-  const handleClick = () => {
+  const handleClick = async() => {
     // e.preventDefault();
 
     if (Object.values(category).every(value => value !== "") && category.images.length > 0) {
@@ -26,8 +25,9 @@ function Addcategory() {
       formData.append('meta_description', category.meta_description)
       formData.append('meta_title', category.meta_title)
 
-      Addcategory(formData);
-      history("/category");
+      const data = await Addcategory(formData);
+      console.log(data)
+      // history("/category");
 
     }
     else {
@@ -47,7 +47,7 @@ function Addcategory() {
         <div className='br'></div>
         <h4><strong>Add Category</strong></h4>
         <hr />
-        <form>
+       
           <div className="row">
             <div className="col-md-6 mb-3">
               <label htmlFor="" >Name</label>
@@ -81,7 +81,7 @@ function Addcategory() {
             </div>
 
           </div>
-        </form>
+        
         {/* </div>
         </div> */}
       </Adminlayout>

@@ -6,6 +6,7 @@ const Reviews = require('../models/Reviews');
 const asyncHandler = require('express-async-handler')
 const User = require('../models/User');
 const Product = require('../models/Product');
+const { ObjectId } = require('mongodb');
 const { body, validationResult } = require('express-validator');
 
 
@@ -21,7 +22,9 @@ router.post('/addreview', fetchUser, upload, multerMiddleware, asyncHandler(asyn
 	try {
 		const { prod_id, user_review, sentiment, user_rate } = req.body;
 		const filenames = req.files.map((file) => file.filename);
-
+		const user = await User.findById(req.user.id);
+		const user_name = user.name;
+		console.log(user_name)
 		// If there are errors, return Bad request and the errors
 		const errors = validationResult(req);
 		if (!errors.isEmpty()) {
@@ -31,7 +34,7 @@ router.post('/addreview', fetchUser, upload, multerMiddleware, asyncHandler(asyn
 		let checkreview = await Reviews.find({ prod_id: prod_id }).find({ user: req.user.id })
 		if (checkreview.length > 0) { return res.json({"failed":"you are not allowed to add a review again"}) }
 		const newreview = new Reviews({
-			user: req.user.id, prod_id, user_review, user_rate, sentiment, images: filenames
+			user: req.user.id, prod_id,user_name, user_review, user_rate, sentiment, images: filenames
 		})
 		const savedreview = await newreview.save()
 		if (!savedreview) { return res.json({ "failed": "Review can not added" }) }
@@ -56,7 +59,8 @@ router.get('/fetchallreview', fetchUser, async (req, res) => {
 // ROUTE 2: Get the specific product Review using: GET "/api/review/fetchreview/:prod_id". Login required
 router.get('/fetchreview/:prod_id', fetchUser, async (req, res) => {
 	try {
-		const review = await Reviews.find({ prod_id: req.params.prod_id });
+		const prod_id = ObjectId(req.params.prod_id)
+		const review = await Reviews.find({ prod_id: prod_id });
 		res.json(review)
 	} catch (error) {
 		console.error(error.message);

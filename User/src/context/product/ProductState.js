@@ -1,11 +1,13 @@
 import ProductContext from "./ProductContext";
 import { useState } from "react";
 import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 const ProductState = (props) => {
   const host = "http://localhost:5000"
   const Intialproduct = []
   const shippingfee = 200
+  const [cookies, , removeCookie] = useCookies(['token']);
   const [alluser, setAlluser] = useState(Intialproduct)
   const [user, setUser] = useState(Intialproduct)
   const [products, setProducts] = useState(Intialproduct)
@@ -28,7 +30,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -44,7 +46,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -60,7 +62,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       },
 
     });
@@ -76,7 +78,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -92,7 +94,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -108,7 +110,7 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       data,
     });
@@ -123,7 +125,7 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQxNjA3ZGIxMGEwZDhjMGViYTU0MzZjIn0sImlhdCI6MTY4MzcyOTI2MCwiZXhwIjoxNjgzODE1NjYwfQ.r0YH-CmdEPb--M8qm-bfOskVJRUV-Ero99IpaMhvlNQ'
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ cat_id, name, slug, orignal_price, selling_price, quantity, description, meta_description, image })
     });
@@ -137,7 +139,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -152,7 +154,7 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ prod_id, prod_qty })
     });
@@ -168,7 +170,7 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ prod_id })
     });
@@ -186,7 +188,7 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         },
 
       });
@@ -207,7 +209,7 @@ const ProductState = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ prod_qty })
     });
@@ -223,7 +225,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
 
     });
@@ -240,7 +242,7 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         },
 
       });
@@ -260,7 +262,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       },
 
     });
@@ -295,7 +297,7 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ name, email, contact, address, country, city, state, zip, total_price, message })
     });
@@ -312,7 +314,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDA2NWNmNDg4MDc2NzQxMjQ4YWQ2In0sImlhdCI6MTY3ODEzMDAyNn0.jyM5vrIYBcfmAE4i3j2ANfsT9tDR9ave-K3NQLSNyzk'
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -327,7 +329,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -343,7 +345,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -359,7 +361,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
 
@@ -376,7 +378,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
 
@@ -393,7 +395,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const getorder = await order.json()
@@ -408,7 +410,7 @@ const ProductState = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ status })
     });
@@ -425,7 +427,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -436,22 +438,25 @@ const ProductState = (props) => {
   // Get User detail
   const getUserdetail = async () => {
     // API Call 
+   
     try {
       const response = await fetch(`${host}/api/auth/getuserdetail`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         }
       });
       const json = await response.json()
       setUser(json)
-
+      
       return (json)
     }
     catch (error) {
-      if (error.status === 401) { localStorage.removeItem('token') }
-      return (error)
+      // console.log("hello")
+      // localStorage.removeItem('token')
+      if (error.status === 401) { removeCookie('token') }
+      return ({error})
     }
 
   }
@@ -464,14 +469,14 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         }
       });
       const json = await response.json()
       return (json)
     }
     catch (err) {
-      localStorage.removeItem('token');
+      removeCookie('token')
       return (err)
     }
 
@@ -491,7 +496,7 @@ const ProductState = (props) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         },
         body: JSON.stringify({ name, slug, description, meta_title, meta_description, image })
       });
@@ -521,7 +526,7 @@ const ProductState = (props) => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         },
         body: JSON.stringify({ cat_id, name, slug, original_price, selling_price, quantity, description, meta_title, meta_description, image })
       });
@@ -541,7 +546,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
 
     });
@@ -557,7 +562,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
 
     });
@@ -587,7 +592,7 @@ const ProductState = (props) => {
       method: 'post',
       url: `${host}/api/review/addreview`,
       headers: {
-        'auth-token': localStorage.getItem('token'),
+        "auth-token": cookies.token
       },
       data,
     });
@@ -602,7 +607,7 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         },
   
       });

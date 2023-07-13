@@ -5,27 +5,28 @@ import Latest from "../Mainpage/Latest";
 import Userlayout from '../Userlayout/Userlayout';
 // import Onsales from "./Mainpageproduct";
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Cart = () => {
 	const navigate = useNavigate();
 	const context = useContext(ProductContext);
+	const [cookies, setCookie] = useCookies(['token']);
 	const { carts, products, shippingfee, fetchCart, Updatecart, Deletecart, getUserdetail } = context;
 	let product = []
 	let total = 0
-
+	console.log(cookies.token)
 	useEffect(() => {
 		/* eslint-disable-next-line */
+		
 		async function fetchData() {
-			try {
-				if (localStorage.getItem('token')) {
+				console.log(cookies.token)
+				if (cookies.token) {
 					const data = await getUserdetail()
 					if (data.error !== undefined) { navigate("/login") }
 					await fetchCart()
 				}
 				else { navigate("/login") }
-			} catch (error) {
-				console.error(error);
-			}
+			
 		}
 		fetchData();
 		// console.log(localStorage.getItem('token'))
@@ -66,7 +67,7 @@ const Cart = () => {
 												<li className="pr-cart-item" key={product._id}>
 													<div className="product-image">
 														<Link to={`/product/${product._id}`}>
-															<figure><img className="card-images" src={`http://localhost:5000/images/${product.images[0]}`} alt="" /></figure>
+															<figure><img className="card-images" src={product.images[0].startsWith("https://") ? product.images[0] : `http://localhost:5000/images/${product.images[0]}`} alt="" /></figure>
 														</Link>
 													</div>
 													<div className="product-name">

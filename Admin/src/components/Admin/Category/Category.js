@@ -35,8 +35,8 @@ function Category() {
                 <div className="product-grid">
                   <div className="product-image">
                     <Link to={`/updatecategory/${category._id}`} className="image">
-                      <img className="pic-1" src={`http://localhost:5000/images/${category.images[0]}`} alt="" />
-                      <img className="pic-2" src={`http://localhost:5000/images/${category.images[0]}`} alt="" />
+                      <img className="pic-1" src={category.images[0].startsWith("https://") ? category.images[0] : `http://localhost:5000/images/${category.images[0]}`} alt="" />
+                      <img className="pic-2" src={category.images[0].startsWith("https://") ? category.images[0] : `http://localhost:5000/images/${category.images[0]}`} alt="" />
                     </Link>
                     <Link onClick={() => handleClick(category._id)} > <span className="fas w3-large fa-trash icon" aria-hidden="true"><DeleteForeverIcon/></span> </Link>
                     <Link to={`/updatecategory/${category._id}`} > <span className="fas fa-edit icon" aria-hidden="true"><SquareEditOutlineIcon/></span> </Link>

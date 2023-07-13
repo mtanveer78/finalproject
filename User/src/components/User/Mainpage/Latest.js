@@ -21,7 +21,7 @@ function Latest() {
 	return (
 		<>
 			<div className="wrap-show-advance-info-box style-1">
-				<h3 className="title-box">Just For you</h3>
+				<h3 className="title-box">JUST FOR YOU</h3>
 				<div className="wrap-top-banner">
 					<Link to="/" className="link-banner banner-effect-2">
 						<figure><img src="assets/images/digital-electronic-banner.jpg" width="1300" height="240" alt="" /></figure>

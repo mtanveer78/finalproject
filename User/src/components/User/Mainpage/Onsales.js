@@ -46,7 +46,7 @@ const Onsales = () => {
 
 			<div className="mt-2">
 				<div className="my-box">
-					<h3 className="sale-heading">On Sale Now</h3>
+					<h3 className="sale-heading">ON SALE NOW</h3>
 					<i className="onsale-label"> Ending in</i>
 					<i className="time">{24 - hours < 10 ? `0${24 - hours}` : 24 - hours}</i>:
 					<i className="time">{60 - minutes < 10 ? `0${60 - minutes}` : 60 - minutes}</i>:

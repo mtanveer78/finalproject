@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import ProductContext from "../../../context/product/ProductContext"
 import { Link, useNavigate, useLocation} from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Header = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const context = useContext(ProductContext);
+	const [cookies, setCookie] = useCookies(['token']);
 	const [user, setUser] = useState([]);
 
 	const [viewuserorder, setViewuserorder] = useState([]);
@@ -15,9 +17,9 @@ const Header = () => {
 		/* eslint-disable-next-line */
 		const fatchData = async () => {
 			// call the function from context
-			if (localStorage.getItem('token')) {
+			if (cookies.token) {
 				const user = await getUserdetail()
-				if (user.status !== 401) {
+				if (!user.error) {
 					setUser(user)
 					await fetchCart()
 				  await fetchWishlist()
@@ -68,7 +70,7 @@ const Header = () => {
 												<li className="menu-item" ><Link className="navbar-item" to="/register">Register</Link></li>
 											</>) :
 												<li className="menu-item menu-item-has-children parent" >
-												 <Link className="navbar-item" to="">{user.name} Account<i className="fa fa-angle-down" aria-hidden="true"></i></Link> 
+												 <Link className="navbar-item" to="">{user?.name} Account<i className="fa fa-angle-down" aria-hidden="true"></i></Link> 
 													<ul className="submenu curency" >
 														<li className="menu-item" >
 															<Link to="/Profile">Profile</Link>
@@ -95,7 +97,7 @@ const Header = () => {
 								<div className="mid-section main-info-area">
 
 									<div className="wrap-logo-top left-section ">
-										<Link to="index.html" className="link-to-home"><img src="assets/images/logo-top-1.png" alt="mercado" /></Link>
+										<Link to="index.html" className="link-to-home"><img src={'http://localhost:5000/images/main-logo.jpeg'} alt="mercado" /></Link>
 									</div>
 
 									<div className="wrap-search center-section">

@@ -48,7 +48,6 @@ router.post('/addcategory', fetchAdmin, upload, multerMiddleware, asyncHandler(a
 // ROUTE 2: Get the all categories using: GET "/api/category/fetchallcategories".
 router.get('/fetchallcategories', async (req, res) => {
 	try {
-		
 		const categories = await Categories.find();
 		if (categories.length===0) { return res.status(404).send("Not Found") }
 		res.json(categories)

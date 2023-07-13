@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import ProductContext from "../../../context/product/ProductContext"
 import { Link } from 'react-router-dom';
 
 function Sidebar() {
+  const context = useContext(ProductContext);
+  const { category } = context;
   
   
   return (
@@ -10,7 +13,14 @@ function Sidebar() {
       <div className="sidebar">
         <div className=" pure-menu">
           <ul className="pure-menu-list">
-            <li className="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+            {category?.map(category => {
+              return (
+                <li className="pure-menu-item pure-menu-has-children pure-menu-allow-hover" key={category._id}>
+                  <Link to={`/category/${category._id}`} className="pure-menu-link">{category.name}</Link>
+                </li>
+              )
+            })}
+            {/* <li className="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
               <Link to="" className="pure-menu-link"> Electronics </Link >
               <ul className="pure-menu-children mtn-0">
                 <li className="pure-menu-item">
@@ -80,7 +90,7 @@ function Sidebar() {
                   <Link to="" className="pure-menu-link"> Table & Accessories </Link >
                 </li>
               </ul>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

@@ -35,12 +35,12 @@ function Order(props) {
               <div className="order-info" key={index}>
                 <Link to={`/order/vieworder/${order._id}`} className="float-right manage">Manage</Link>
                 <Link to={`/order/vieworder/${order._id}`}><h4 className="track-id" >Order #{order.tracking_no}</h4></Link>
-                <h5 className="order-date">Placed on {order.date}</h5>
+                <h5 className="order-date">Placed on <strong>{order.createdAt.split("T")[0]}</strong></h5>
                 {order.orderitems?.map((orderitem, index) => (
                   <div className="item-info" key={index}>
                     <hr />
                     <div className="col-md-2 ">
-                      <img className="prod-image" src={`http://localhost:5000/images/${orderitem.prod_image}`} alt="" />
+                      <img className="prod-image" src={orderitem.prod_image.startsWith("https://") ? orderitem.prod_image : `http://localhost:5000/images/${orderitem.prod_image}`} alt="" />
                     </div>
                     <div className="col-md-4 prod-name">
                       <h4>{orderitem.prod_name}</h4>
@@ -52,7 +52,7 @@ function Order(props) {
                       <h4 className="order-staus">{order.status}</h4>
                     </div>
                     <div className="col-md-3 status-date">
-                      <h4>Delivered on 04 Jun 2023</h4>
+                      <h4>{order.status} on <strong>{order.updatedAt.split("T")[0]}</strong></h4>
                     </div>
                   </div>
                 ))}

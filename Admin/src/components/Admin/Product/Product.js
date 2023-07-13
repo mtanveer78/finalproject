@@ -90,8 +90,8 @@ function Product() {
                 <div className="product-grid">
                   <div className="product-image">
                     <Link to={`/viewproductdetail/${product._id}`} className="image">
-                      <img className="pic-1" src={`http://localhost:5000/images/${product.images[0]}`} alt="" />
-                      <img className="pic-2" src={`http://localhost:5000/images/${product.images[0]}`} alt="" />
+                      <img className="pic-1"  src={product.images[0].startsWith("https://") ? product.images[0] : `http://localhost:5000/images/${product.images[0]}`} alt="" />
+                      <img className="pic-2"  src={product.images[0].startsWith("https://") ? product.images[0] : `http://localhost:5000/images/${product.images[0]}`}alt="" />
                     </Link>
                     <Link onClick={() => handleClick(product._id)} > <span className="fa w3-large fa-trash icon" aria-hidden="true"><DeleteForeverIcon /></span> </Link>
                     <Link to={`/updateproduct/${product._id}`} > <span className="fas fa-edit icon" aria-hidden="true"><SquareEditOutlineIcon /></span> </Link>

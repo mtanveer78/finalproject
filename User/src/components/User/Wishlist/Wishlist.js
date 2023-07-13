@@ -5,10 +5,12 @@ import Latest from "../Mainpage/Latest";
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import Userlayout from '../Userlayout/Userlayout';
+import { useCookies } from 'react-cookie';
 
 const Wishlist = () => {
   const navigate = useNavigate();
   const context = useContext(ProductContext);
+  const [cookies, setCookie] = useCookies(['token']);
   const { products, wishlist, fetchWishlist, DeleteWishlist, AddtoCartproduct, getUserdetail } = context;
   let product = []
   // const [quantity, setquantity] = useState(1)
@@ -17,12 +19,15 @@ const Wishlist = () => {
     /* eslint-disable-next-line */
     async function fetchData() {
       try {
-        if (localStorage.getItem('token')) {
+        if (cookies.token) {
           const data = await getUserdetail()
           if (data.error !== undefined) { navigate("/login") }
           await fetchWishlist()
         }
-        else { navigate("/login"); }
+        else { 
+          console.log(cookies.token)
+          navigate("/login"); 
+        }
       } catch (error) {
         console.error(error);
       }
@@ -74,7 +79,7 @@ const Wishlist = () => {
                         
                         <li className="pr-cart-item">
                           <div className="product-image">
-                            <Link to={`/product/${product._id}`}><figure className="wishlist-image"><img src={`http://localhost:5000/images/${product.images[0]}`} alt="" /></figure></Link>
+                            <Link to={`/product/${product._id}`}><figure className="wishlist-image"><img  src={product.images[0].startsWith("https://") ? product.images[0] : `http://localhost:5000/images/${product.images[0]}`} alt="" /></figure></Link>
                           </div>
                           <div className="product-name ">
                             <Link className="link-to-product" to={`/product/${product._id}`}>{product.name} </Link><br />

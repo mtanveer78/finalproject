@@ -16,7 +16,7 @@ router.post('/addproduct', upload, multerMiddleware,
 			const { catid, name,slug, original_price,selling_price,description,quantity,meta_title,meta_description,images } = req.body;
 			console.log(req.body);
 			const filenames = req.files.map((file) => file.filename)
-
+			
 
 			const categories = await Categories.findById({_id:catid});
 		  if (!categories) { return res.status(404).send("Category Not Found") }

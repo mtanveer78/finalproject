@@ -101,7 +101,10 @@ slides-carousel{
   margin: 0 auto;
   float: left;
 }
-
+.no-order{
+  margin-top: 50px;
+  text-align: center;
+}
 .mt-5{
   margin-top: 50px;
 }

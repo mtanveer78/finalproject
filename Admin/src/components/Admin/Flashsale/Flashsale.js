@@ -87,8 +87,8 @@ function Flashsale() {
                 <div className="product-grid">
                   <div className="product-image">
                     <Link to={`/viewproductdetail/${product.product_info[0]._id}`} className="image">
-                      <img className="pic-1" src={`http://localhost:5000/images/${product.product_info[0].images[0]}`} alt="" />
-                      <img className="pic-2" src={`http://localhost:5000/images/${product.product_info[0].images[0]}`} alt="" />
+                      <img className="pic-1" src={product.product_info[0].images[0].startsWith("https://") ? product.product_info[0].images[0] : `http://localhost:5000/images/${product.product_info[0].images[0]}`} alt="" />
+                      <img className="pic-2" src={product.product_info[0].images[0].startsWith("https://") ? product.product_info[0].images[0] : `http://localhost:5000/images/${product.product_info[0].images[0]}`} alt="" />
                     </Link>
                     <Link onClick={() => handleClick(product._id)} > <span className="fa w3-large fa-trash icon" aria-hidden="true"><DeleteForeverIcon /></span> </Link>
                     <Link type="button" value="Click to Open Popup" onClick={() => OnClick(product._id, product.sale_date, product.product_info[0].name)}>

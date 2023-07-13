@@ -1,11 +1,13 @@
 import ProductContext from "./ProductContext";
 import { useState } from "react";
 import axios from "axios";
+import { useCookies } from 'react-cookie';
 
 const ProductState = (props) => {
   const host = "http://localhost:5000"
 
   const shippingfee = 200
+  const [cookies, , setCookie] = useCookies(['token']);
   const [alluser, setAlluser] = useState([])
   const [user, setUser] = useState([])
   const [products, setProducts] = useState([])
@@ -29,7 +31,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -45,7 +47,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -61,7 +63,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       },
 
     });
@@ -77,7 +79,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -89,28 +91,30 @@ const ProductState = (props) => {
   // Get all Category
   const getCategory = async () => {
     // API Call 
+    console.log(cookies.token)
     const response = await fetch(`${host}/api/category/fetchallcategories`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
     setCategory(json)
-    
+
     return (json)
 
   }
 
   // Add Category
   const Addcategory = async (data) => {
-     // API Call 
+    // API Call 
+    console.log(cookies.token)
     const response = await axios({
       method: 'post',
       url: `${host}/api/category/addcategory`,
       headers: {
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQxNjA3ZGIxMGEwZDhjMGViYTU0MzZjIn0sImlhdCI6MTY4MzczMjkzOSwiZXhwIjoxNjgzODE5MzM5fQ.ADtZntoF4uRGtycaRY_bAXCYqDFLmTJn48_2zCvhfL4'
+        "auth-token":cookies.token
       },
       data,
     });
@@ -119,13 +123,13 @@ const ProductState = (props) => {
 
   // Get specific product detail
   const Insertproduct = async (data) => {
-   
+
     // API Call 
     const response = await axios({
       method: 'post',
       url: `${host}/api/product/addproduct`,
       headers: {
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQxNjA3ZGIxMGEwZDhjMGViYTU0MzZjIn0sImlhdCI6MTY4MzczMjkzOSwiZXhwIjoxNjgzODE5MzM5fQ.ADtZntoF4uRGtycaRY_bAXCYqDFLmTJn48_2zCvhfL4'
+        "auth-token": cookies.token
       },
       data,
     });
@@ -138,7 +142,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       }
     });
     const json = await response.json()
@@ -153,9 +157,9 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token":  cookies.token
       },
-      body: JSON.stringify({ prod_id, prod_qty })
+      body: cookies.token
     });
     const json = await response.json()
     fetchCart()
@@ -169,7 +173,7 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ prod_id })
     });
@@ -187,7 +191,7 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         },
 
       });
@@ -208,7 +212,7 @@ const ProductState = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
       body: JSON.stringify({ prod_qty })
     });
@@ -224,7 +228,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token": cookies.token
       },
 
     });
@@ -241,7 +245,7 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token": cookies.token
         },
 
       });
@@ -260,7 +264,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       },
 
     });
@@ -294,7 +298,7 @@ const ProductState = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token":  cookies.token
       },
       body: JSON.stringify({ name, email, contact, address, country, city, state, zip, total_price, message })
     });
@@ -311,7 +315,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDA2NWNmNDg4MDc2NzQxMjQ4YWQ2In0sImlhdCI6MTY3ODEzMDAyNn0.jyM5vrIYBcfmAE4i3j2ANfsT9tDR9ave-K3NQLSNyzk'
+        "auth-token":  cookies.token
       }
     });
     const json = await response.json()
@@ -326,7 +330,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       }
     });
     const json = await response.json()
@@ -342,7 +346,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       }
     });
     const json = await response.json()
@@ -358,14 +362,14 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       }
     });
     const orderitem = await fetch(`${host}/api/order/orderitem/${order_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token": cookies.token
       }
     });
     const getorder = await order.json()
@@ -383,7 +387,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       }
     });
     const getorder = await order.json()
@@ -398,12 +402,13 @@ const ProductState = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       },
       body: JSON.stringify({ status })
     });
     const json = await response.json()
     getOrders()
+    return json
   }
 
 
@@ -414,7 +419,7 @@ const ProductState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": localStorage.getItem('token')
+        "auth-token":  cookies.token
       }
     });
     const json = await response.json()
@@ -430,7 +435,7 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token":  cookies.token
         }
       });
       const json = await response.json()
@@ -438,7 +443,7 @@ const ProductState = (props) => {
       return (json)
     }
     catch (error) {
-      if(error.status===401){localStorage.removeItem('token')}
+      if (error.status === 401) { localStorage.removeItem('token') }
       return (error)
     }
 
@@ -452,7 +457,7 @@ const ProductState = (props) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token":  cookies.token
         }
       });
       const json = await response.json()
@@ -467,21 +472,21 @@ const ProductState = (props) => {
 
   // Update Category detail
   const updateCategory = async (category) => {
-    const name=category.name;
-    const slug=category.slug;
-    const description=category.description;
-    const meta_title=category.meta_title;
-    const meta_description=category.meta_description;
-    const image=category.image;
+    const name = category.name;
+    const slug = category.slug;
+    const description = category.description;
+    const meta_title = category.meta_title;
+    const meta_description = category.meta_description;
+    const image = category.image;
     // API Call 
     try {
       const response = await fetch(`${host}/api/category/updatecategory/${category._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": localStorage.getItem('token')
+          "auth-token":  cookies.token
         },
-        body: JSON.stringify({ name, slug, description,meta_title, meta_description, image })
+        body: JSON.stringify({ name, slug, description, meta_title, meta_description, image })
       });
       const json = await response.json()
       return (json)
@@ -493,25 +498,25 @@ const ProductState = (props) => {
   }
 
   // Update Product detail
-  const updateProduct = async (cat_id,product) => {
-    const name=product.name;
-    const slug=product.slug;
-    const original_price=product.original_price;
-    const selling_price=product.selling_price;
-    const quantity=product.quantity;
-    const description=product.description;
-    const meta_title=product.meta_title;
-    const meta_description=product.meta_description;
-    const image=product.image;
+  const updateProduct = async (cat_id, product) => {
+    const name = product.name;
+    const slug = product.slug;
+    const original_price = product.original_price;
+    const selling_price = product.selling_price;
+    const quantity = product.quantity;
+    const description = product.description;
+    const meta_title = product.meta_title;
+    const meta_description = product.meta_description;
+    const image = product.image;
     // API Call 
     try {
       const response = await fetch(`${host}/api/product/updateproduct/${product._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+          "auth-token":  cookies.token
         },
-        body: JSON.stringify({cat_id, name, slug,original_price,selling_price,quantity, description,meta_title, meta_description, image })
+        body: JSON.stringify({ cat_id, name, slug, original_price, selling_price, quantity, description, meta_title, meta_description, image })
       });
       const json = await response.json()
       return (json)
@@ -530,7 +535,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       },
 
     });
@@ -546,7 +551,7 @@ const ProductState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       },
 
     });
@@ -554,15 +559,15 @@ const ProductState = (props) => {
     getCategory()
     return (json)
   }
-  
- // Add product to Flash Sale
+
+  // Add product to Flash Sale
   const AddtoFlashsale = async (prod_id, sale_date) => {
     // API Call 
     const response = await fetch(`${host}/api/flashsale/addflashsale`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+        "auth-token":  cookies.token
       },
       body: JSON.stringify({ prod_id, sale_date })
     });
@@ -586,16 +591,16 @@ const ProductState = (props) => {
   }
 
   // Update Product in Flash sale
-  const updateFlashsale = async (id,sale_date) => {
+  const updateFlashsale = async (id, sale_date) => {
     // API Call 
     try {
       const response = await fetch(`${host}/api/flashsale/updateflashsale/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+          "auth-token":  cookies.token
         },
-        body: JSON.stringify( {sale_date })
+        body: JSON.stringify({ sale_date })
       });
       const json = await response.json()
       getFlashproduct()
@@ -606,25 +611,52 @@ const ProductState = (props) => {
     }
   }
 
-    // Delete product from Flash sale
-    const deleteFlashsale = async (id) => {
-      // API Call  
-      const response = await fetch(`${host}/api/flashsale/deletefalshsale/${id}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          "auth-token": 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjM2MDFiYjA0MGIzMjZhZjE1NmFiOTY3In0sImlhdCI6MTY2NzI0MjkyOH0.YKyhqoOXmlEP3rjfgG4CHpdmwAEWaI84dSVnfAbyHSs'
+  // Delete product from Flash sale
+  const deleteFlashsale = async (id) => {
+    // API Call  
+    const response = await fetch(`${host}/api/flashsale/deletefalshsale/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        "auth-token":  cookies.token
+      },
+
+    });
+    const json = await response.json();
+    getFlashproduct()
+    return (json)
+  }
+
+ // Login Admin
+ const AdminLogin = async (email,password) => {
+  // API Call 
+ 
+  try {
+    const response = await fetch(`${host}/api/auth/admin/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
         },
-  
-      });
-      const json = await response.json();
-      getFlashproduct()
-      return (json)
+      body: JSON.stringify({ email, password })
+    });
+    const json = await response.json()
+
+    if(json.success){
+    return (json)
     }
-  
+    else{
+      return({error:"Invalid Credentials"})
+    }
+  }
+  catch (error) {
+    return ({ error: "Internal Error" })
+  }
+}
+
+
 
   return (
-    <ProductContext.Provider value={{ user, alluser, products, product, carts, wishlist, subtotal, shippingfee, category, orders, vieworder, viewuserorder, orderitem, allreview, review,flashsale, getReview, getUser, getAllUser, DeleteUser, Totalgrand, setProducts, getProducts, Insertproduct, getCategory, Addcategory, getProductsdetail, AddtoCartproduct, AddWishlist, fetchCart, Updatecart, Deletecart, fetchWishlist, DeleteWishlist, PlaceOrder, getOrders, getViewOrder, getViewUserOrder, updateOrder, getAllReview, getCategoryProduct, getUserdetail, getSpecificCategory,updateCategory,updateProduct,deleteProduct,deleteCategory, AddtoFlashsale,getFlashproduct,updateFlashsale,deleteFlashsale }}>
+    <ProductContext.Provider value={{ user, alluser, products, product, carts, wishlist, subtotal, shippingfee, category, orders, vieworder, viewuserorder, orderitem, allreview, review, flashsale, getReview, getUser, getAllUser, DeleteUser, Totalgrand, setProducts, getProducts, Insertproduct, getCategory, Addcategory, getProductsdetail, AddtoCartproduct, AddWishlist, fetchCart, Updatecart, Deletecart, fetchWishlist, DeleteWishlist, PlaceOrder, getOrders, getViewOrder, getViewUserOrder, updateOrder, getAllReview, getCategoryProduct, getUserdetail, getSpecificCategory, updateCategory, updateProduct, deleteProduct, deleteCategory, AddtoFlashsale, getFlashproduct, updateFlashsale, deleteFlashsale,AdminLogin }}>
       {props.children}
     </ProductContext.Provider>
   )

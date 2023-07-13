@@ -17,25 +17,26 @@ const Detail = () => {
 	const [product, setProduct] = useState([])
 	const [images, setImages] = useState([])
 	const [quantity, setQuantity] = useState(1)
+	const [transactions, setTransactions] = useState([])
 
-	const AddtoCart = async() => {
-		
-			if (localStorage.getItem('token')) {
-				
-				const qty = document.getElementById("qty").value;
-				const data = await AddtoCartproduct(product._id, qty)
+	const AddtoCart = async () => {
 
-				if (data.Success !== undefined) {
-					swal("Product Added", data.Success, "success");
-				}
-				else {
-					swal("Error", data.Failed, "warning");
-				}
+		if (localStorage.getItem('token')) {
+
+			const qty = document.getElementById("qty").value;
+			const data = await AddtoCartproduct(product._id, qty)
+
+			if (data.Success !== undefined) {
+				swal("Product Added", data.Success, "success");
 			}
-			else { navigate("/login") }
-		
+			else {
+				swal("Error", data.Failed, "warning");
+			}
+		}
+		else { navigate("/login") }
+
 	}
-	
+
 	const AddtoWishlist = async () => {
 		if (localStorage.getItem('token')) {
 			const data = await AddWishlist(product._id)
@@ -73,9 +74,17 @@ const Detail = () => {
 			try {
 				const prod = await getProductsdetail(prod_id)
 				setProduct(prod)
+				const response = await fetch(`http://localhost:5000/api/review/fetchreview/${prod._id}`);
+        const json = await response.json();
+        
+        setTransactions(json);
 				const newImages = prod.images.map((image) => ({
-					original: `http://localhost:5000/images/${image}`,
-					thumbnail: `http://localhost:5000/images/${image}`,
+					original: image.startsWith("https://") ? image : `http://localhost:5000/images/${image}`,
+					thumbnail: image.startsWith("https://") ? image : `http://localhost:5000/images/${image}`,
+					// originalWidth: 300,
+					// originalHeight: 300,
+					// thumbnailWidth: 110,
+					// thumbnailHeight: 110,
 				}));
 				setImages((prevImages) => {
 					// Filter out any images that already exist in the state
@@ -173,8 +182,8 @@ const Detail = () => {
 											))}
 										</div>.
 										<div className="wrap-review-form">
-											<div className="title-name" >01 review for <strong>{product.name}</strong></div>
-											<Reviews />
+
+											<Reviews prod_id={prod_id} prod_name={product.name} transactions={transactions} />
 											{/* <div id="comments">
 												<h2 className="woocommerce-Reviews-title ">01 review for <span>Radiant-360 R6 Chainsaw Omnidirectional [Orage]</span></h2>
 												<ol className="commentlist">
@@ -355,7 +364,7 @@ const Detail = () => {
 								</div>
 
 							</div>
-							
+
 						</div>
 						<Latest />
 					</div>

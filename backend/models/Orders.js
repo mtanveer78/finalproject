@@ -57,11 +57,8 @@ const OrdersSchema = new Schema({
   tracking_no: {
 		type: String,
 		default: "user123"
-	},
-	date: {
-		type: Date,
-		default: Date.now
-	},
-});
+	}
+},
+ {timestamps: true});
 const User = mongoose.model('orders', OrdersSchema);
 module.exports = User;

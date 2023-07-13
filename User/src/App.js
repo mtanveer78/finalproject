@@ -23,6 +23,7 @@ import Profile from './components/User/Profile/Profile';
 import { ProtectedRoute } from './Protected';
 import Review from './components/User/Order/Review';
 
+
 // import Sidebar from './components/Admin/Sidebar';
 // import Navbar from './components/Admin/Navbar';
 // import Footer from './components/Admin/Footer';
@@ -57,7 +58,6 @@ const App = () => {
             <Route exact path="/contact" element={<Contactus />} />
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/register" element={<Register />} />
-            {/* <Route exact path="/cart" element={<Cart onsaleproduct={onsaleproduct}/>} /> */}
             <Route path="/cart" exact element={<ProtectedRoute> <Cart /> </ProtectedRoute>} />
             <Route exact path="/checkout" element={<ProtectedRoute> <Checkout/> </ProtectedRoute>} />
             <Route exact path="/product/:prod_id" element={<Detail />} />
