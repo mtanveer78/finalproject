@@ -7,6 +7,7 @@ import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
 import Reviews from './Reviews';
 import Latest from '../Mainpage/Latest';
+import Sidebar from '../Userlayout/Sidebar';
 // import "react-image-gallery/styles/scss/image-gallery.scss"
 
 const Detail = () => {
@@ -106,6 +107,7 @@ const Detail = () => {
 	return (
 		<div>
 			<Userlayout>
+				<Sidebar />
 				<main id="main" className="main-site">
 
 					<div className="container">
@@ -183,7 +185,7 @@ const Detail = () => {
 										</div>.
 										<div className="wrap-review-form">
 
-											<Reviews prod_id={prod_id} prod_name={product.name} transactions={transactions} />
+											<Reviews prod_name={product.name} transactions={transactions} />
 											{/* <div id="comments">
 												<h2 className="woocommerce-Reviews-title ">01 review for <span>Radiant-360 R6 Chainsaw Omnidirectional [Orage]</span></h2>
 												<ol className="commentlist">

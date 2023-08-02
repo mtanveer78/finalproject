@@ -548,8 +548,9 @@ body {
   text-overflow: ellipsis;
 }
 
-.wrap-logo-top{
-  width: 200px !important;
+.logo-image{
+  /* width: 200px !important; */
+  height: 100px !important;
 }
 
 

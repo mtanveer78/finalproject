@@ -9,6 +9,7 @@ function Review() {
   const context = useContext(ProductContext);
   const { review, getReview } = context;
 
+
   useEffect(() => {
     /* eslint-disable-next-line */
     getReview(prod_id)
@@ -35,15 +36,18 @@ function Review() {
                 </tr>
               </thead>
               <tbody>
+               
                 {review?.map(reviewitem => {
                   return (
+                    reviewitem.sentiment === 1 ?
                     <tr>
                       <td id="simple-text">{moment(reviewitem.date).utc().format('DD-MM-YY')}</td>
                       <td id="simple-text">{reviewitem.user}</td>
-                      <td id="simple-text">{reviewitem.user_review}</td>
+                      <td id="simple-text">{reviewitem.user_review.length}</td>
                       <td id="simple-text">{reviewitem.user_rate}</td>
                       <td id="simple-text">Positive</td>
                     </tr>
+                    :""
                   );
                 })}
               </tbody>
@@ -66,13 +70,15 @@ function Review() {
 
                 {review?.map(reviewitem => {
                   return (
+                    reviewitem.sentiment === 0 ?
                     <tr>
                       <td id="simple-text">{moment(reviewitem.date).utc().format('DD-MM-YY')}</td>
                       <td id="simple-text">{reviewitem.user}</td>
-                      <td id="simple-text">{reviewitem.user_review}</td>
+                      <td id="simple-text">{reviewitem.user_review.length}</td>
                       <td id="simple-text">{reviewitem.user_rate}</td>
-                      <td id="simple-text">Positive</td>
+                      <td id="simple-text">Negative</td>
                     </tr>
+                    :""
                   );
                 })}
               </tbody>

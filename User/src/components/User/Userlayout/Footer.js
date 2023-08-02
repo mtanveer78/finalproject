@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useContext } from 'react'
+import ProductContext from "../../../context/product/ProductContext"
 import { Link } from 'react-router-dom';
+import swal from "sweetalert";
+
+
+
+
 
 const Footer = () => {
+	const context = useContext(ProductContext);
+	const { category } = context;
+	const cateogries = category.slice(0, 5);
 	return (
 		<>
 
@@ -15,7 +24,7 @@ const Footer = () => {
 									<i className="fa fa-truck" aria-hidden="true"></i>
 									<div className="wrap-left-info">
 										<h4 className="fc-name">Free Shipping</h4>
-										<p className="fc-desc">Free On Oder Over $99</p>
+										<p className="fc-desc">Free On Oder Over Rs.9999</p>
 									</div>
 
 								</li>
@@ -62,15 +71,15 @@ const Footer = () => {
 												<ul>
 													<li>
 														<i className="fa fa-map-marker" aria-hidden="true"></i>
-														<p className="contact-txt">45 Grand Central Terminal New York,NY 1017 United State USA</p>
+														<p className="contact-txt">Ali Town, Thokar niaz biag, Lahore, Punjab, Pakistan</p>
 													</li>
 													<li>
 														<i className="fa fa-phone" aria-hidden="true"></i>
-														<p className="contact-txt">(+123) 456 789 - (+123) 666 888</p>
+														<p className="contact-txt">(+92331) 6460611 - (+92331) 5873323</p>
 													</li>
 													<li>
 														<i className="fa fa-envelope" aria-hidden="true"></i>
-														<p className="contact-txt">Contact@yourcompany.com</p>
+														<p className="contact-txt">tanveerhabtani308@gmail.com</p>
 													</li>
 												</ul>
 											</div>
@@ -85,7 +94,7 @@ const Footer = () => {
 										<div className="item-content">
 											<div className="wrap-hotline-footer">
 												<span className="desc">Call Us toll Free</span>
-												<b className="phone-number">(+123) 456 789 - (+123) 666 888</b>
+												<b className="phone-number">(+92331) 6460611 - (+92331) 5873323</b>
 											</div>
 										</div>
 									</div>
@@ -115,7 +124,7 @@ const Footer = () => {
 														<li className="menu-item"><Link to="/" className="link-term">Brands</Link></li>
 														<li className="menu-item"><Link to="/" className="link-term">Gift Certificates</Link></li>
 														<li className="menu-item"><Link to="/" className="link-term">Affiliates</Link></li>
-														<li className="menu-item"><Link to="/" className="link-term">Wish list</Link></li>
+														<li className="menu-item"><Link to="/whishlist" className="link-term">Wish list</Link></li>
 													</ul>
 												</div>
 											</div>
@@ -125,11 +134,11 @@ const Footer = () => {
 											<div className="item-content">
 												<div className="wrap-vertical-nav">
 													<ul>
-														<li className="menu-item"><Link to="/" className="link-term">Contact Us</Link></li>
+														<li className="menu-item"><Link to="/contactus" className="link-term">Contact Us</Link></li>
 														<li className="menu-item"><Link to="/" className="link-term">Returns</Link></li>
 														<li className="menu-item"><Link to="/" className="link-term">Site Map</Link></li>
 														<li className="menu-item"><Link to="/" className="link-term">Specials</Link></li>
-														<li className="menu-item"><Link to="/" className="link-term">Order History</Link></li>
+														<li className="menu-item"><Link to="/order/orderhistory" className="link-term">Order History</Link></li>
 													</ul>
 												</div>
 											</div>
@@ -158,11 +167,11 @@ const Footer = () => {
 										<div className="item-content">
 											<div className="wrap-list-item social-network">
 												<ul>
-													<li><Link to="/" className="link-to-item" title="twitter"><i className="fa fa-twitter" aria-hidden="true"></i></Link></li>
-													<li><Link to="/" className="link-to-item" title="facebook"><i className="fa fa-facebook" aria-hidden="true"></i></Link></li>
-													<li><Link to="/" className="link-to-item" title="pinterest"><i className="fa fa-pinterest" aria-hidden="true"></i></Link></li>
-													<li><Link to="/" className="link-to-item" title="instagram"><i className="fa fa-instagram" aria-hidden="true"></i></Link></li>
-													<li><Link to="/" className="link-to-item" title="vimeo"><i className="fa fa-vimeo" aria-hidden="true"></i></Link></li>
+													<li><Link to="https://twitter.com" className="link-to-item" title="twitter"><i className="fa fa-twitter" aria-hidden="true"></i></Link></li>
+													<li><Link to="https://facebook.com" className="link-to-item" title="facebook"><i className="fa fa-facebook" aria-hidden="true"></i></Link></li>
+													<li><Link to="https://pinterest.com" className="link-to-item" title="pinterest"><i className="fa fa-pinterest" aria-hidden="true"></i></Link></li>
+													<li><Link to="https://instagram.com" className="link-to-item" title="instagram"><i className="fa fa-instagram" aria-hidden="true"></i></Link></li>
+													<li><Link to="https://vimeo.com" className="link-to-item" title="vimeo"><i className="fa fa-vimeo" aria-hidden="true"></i></Link></li>
 												</ul>
 											</div>
 										</div>
@@ -175,8 +184,8 @@ const Footer = () => {
 										<div className="item-content">
 											<div className="wrap-list-item apps-list">
 												<ul>
-													<li><Link to="/" className="link-to-item" title="our application on apple store"><figure><img src="assets/images/brands/apple-store.png" alt="apple store" width="128" height="36" /></figure></Link></li>
-													<li><Link to="/" className="link-to-item" title="our application on google play store"><figure><img src="assets/images/brands/google-play-store.png" alt="google play store" width="128" height="36" /></figure></Link></li>
+													<li><Link to="" onClick={() => swal("Success", "Implemented in future soon", "success")} className="link-to-item" title="our application on apple store"><figure><img src="assets/images/brands/apple-store.png" alt="apple store" width="128" height="36" /></figure></Link></li>
+													<li><Link to="" onClick={() => swal("Success", "Implemented in future soon", "success")} className="link-to-item" title="our application on google play store"><figure><img src="assets/images/brands/google-play-store.png" alt="google play store" width="128" height="36" /></figure></Link></li>
 												</ul>
 											</div>
 										</div>
@@ -192,7 +201,16 @@ const Footer = () => {
 									<h3 className="backlink-title">Quick Links</h3>
 									<div className="back-link-row">
 										<ul className="list-back-link" >
-											<li><span className="row-title">Mobiles:</span></li>
+											{category.map(category => {
+												return(
+												<>
+												
+													<li><Link to={`/category/${category._id}`} className="redirect-back-link" title="mobile">{category.name}</Link></li>
+												</>
+											)})}
+										</ul>
+										{/* <ul className="list-back-link" >
+											<li><span className="row-title">Mobilesljfniowp:</span></li>
 											<li><Link to="/" className="redirect-back-link" title="mobile">Mobiles</Link></li>
 											<li><Link to="/" className="redirect-back-link" title="yphones">YPhones</Link></li>
 											<li><Link to="/" className="redirect-back-link" title="Gianee Mobiles GL">Gianee Mobiles GL</Link></li>
@@ -229,7 +247,7 @@ const Footer = () => {
 											<li><Link to="/" className="redirect-back-link" title="Loose Diamond Shoes" >Loose Diamond Shoes</Link></li>
 											<li><Link to="/" className="redirect-back-link" title="BootsMen Watches" >BootsMen Watches</Link></li>
 											<li><Link to="/" className="redirect-back-link" title="Women Watches" >Women Watches</Link></li>
-										</ul>
+										</ul> */}
 
 									</div>
 								</div>

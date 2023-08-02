@@ -7,7 +7,7 @@ const Header = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const context = useContext(ProductContext);
-	const [cookies, setCookie] = useCookies(['token']);
+	const [cookies, , removeCookie] = useCookies(['token']);
 	const [user, setUser] = useState([]);
 
 	const [viewuserorder, setViewuserorder] = useState([]);
@@ -28,7 +28,7 @@ const Header = () => {
 					setViewuserorder(viewuserorder)
 				}
 				else{
-					localStorage.removeItem('token')
+					removeCookie('token')
 
 				}
 			}
@@ -38,7 +38,7 @@ const Header = () => {
 	}, [])
 
 	const Logout = async() => {
-		localStorage.removeItem('token')
+		removeCookie('token')
 		if(path==="/"){window.location.reload();}
 		else{navigate("/")}
 		
@@ -97,7 +97,7 @@ const Header = () => {
 								<div className="mid-section main-info-area">
 
 									<div className="wrap-logo-top left-section ">
-										<Link to="index.html" className="link-to-home"><img src={'http://localhost:5000/images/main-logo.jpeg'} alt="mercado" /></Link>
+										<Link to="index.html" className="link-to-home"><img className="logo-image" src={'http://localhost:5000/images/main-logo.jpeg'} alt="mercado" /></Link>
 									</div>
 
 									<div className="wrap-search center-section">

@@ -14,7 +14,6 @@ router.post('/addproduct', upload, multerMiddleware,
 	asyncHandler(async (req, res) => {
 		try {
 			const { catid, name,slug, original_price,selling_price,description,quantity,meta_title,meta_description,images } = req.body;
-			console.log(req.body);
 			const filenames = req.files.map((file) => file.filename)
 			
 

@@ -22,14 +22,14 @@
   background-color: white !important;
 }
 .simple-text{
-  color: black !important;
+  color: black ;
 }
 #simple-text{
-  color: black !important;
+  color: black ;
 }
 
 p , td, th, tr, h4, label, input, textarea, i, tbody{
-  color: black !important;
+  color: black ;
 }
 
 th{

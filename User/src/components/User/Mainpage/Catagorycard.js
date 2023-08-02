@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { forwardRef } from 'react';
 import { Link } from "react-router-dom";
 import "../assets/css/cards.css"
 
-function Catagorycard(props) {
+const Catagorycard = forwardRef((props, ref) => {
   return (
     <>
-      <div key={props.index} className={`col-xs-12 col-sm-6 col-md-2 mt-2 ${props.page === "bodypage" ? "category-card" : ""}`}>
+      <div ref={ref} key={props.index} className={`col-xs-12 col-sm-6 col-md-2 mt-2 ${props.page === "bodypage" ? "category-card" : ""}`}>
 
         <div className={`${props.page === "bodypage" ? "" : "image-flip"}`} >
           <div className="mainflip flip-0">
@@ -37,6 +37,6 @@ function Catagorycard(props) {
       </div>
     </>
   )
-}
+})
 
 export default Catagorycard

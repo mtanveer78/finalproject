@@ -14,19 +14,17 @@ const Cart = () => {
 	const { carts, products, shippingfee, fetchCart, Updatecart, Deletecart, getUserdetail } = context;
 	let product = []
 	let total = 0
-	console.log(cookies.token)
 	useEffect(() => {
 		/* eslint-disable-next-line */
-		
+
 		async function fetchData() {
-				console.log(cookies.token)
-				if (cookies.token) {
-					const data = await getUserdetail()
-					if (data.error !== undefined) { navigate("/login") }
-					await fetchCart()
-				}
-				else { navigate("/login") }
-			
+			if (cookies.token) {
+				const data = await getUserdetail()
+				if (data.error !== undefined) { navigate("/login") }
+				await fetchCart()
+			}
+			else { navigate("/login") }
+
 		}
 		fetchData();
 		// console.log(localStorage.getItem('token'))
@@ -109,12 +107,9 @@ const Cart = () => {
 											<input className="frm-input " name="have-code" id="have-code" value="" type="checkbox" /><span>I have promo code</span>
 										</label>
 										<Link className="btn btn-checkout" to="/checkout">Check out</Link>
-										<Link className="link-to-shop" to="shop.html">Continue Shopping<i className="fa fa-arrow-circle-right" aria-hidden="true"></i></Link>
+										<Link className="link-to-shop" to="/">Continue Shopping<i className="fa fa-arrow-circle-right" aria-hidden="true"></i></Link>
 									</div>
-									<div className="update-clear col-md-3" style={{ paddingLeft: "100px" }}>
-										<Link className="btn btn-clear" style={{ marginTop: "50px" }} to="#">Clear Shopping Cart</Link>
-										<Link className="btn btn-update" to="#">Update Shopping Cart</Link>
-									</div>
+
 								</div>
 							</div>
 							) : (<h3 className='text-center'>Cart is Empty</h3>)}

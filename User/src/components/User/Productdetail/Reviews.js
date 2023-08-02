@@ -9,8 +9,6 @@ const Reviews = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const transactionsPerPage = 5;
   const transactions = props.transactions
-  const prod_id = props.prod_id;
-  
 
   // Logic to calculate pagination
   const indexOfLastTransaction = currentPage * transactionsPerPage;
@@ -46,7 +44,7 @@ const Reviews = (props) => {
         <div className="image">
           {transaction.images?.map(image => {
             return (
-              <img className="review-image" src={`http://localhost:5000/images/${image}`} />
+              <img className="review-image" src={`http://localhost:5000/images/${image}`} alt=""/>
             );
           })}
         </div>

@@ -5,6 +5,7 @@ import Userlayout from "../Userlayout/Userlayout";
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import Latest from "../Mainpage/Latest";
+
 const Checkout = (props) => {
 	const [user, setUser] = useState([])
 	const context = useContext(ProductContext);
@@ -52,7 +53,7 @@ const Checkout = (props) => {
 	}
 	const Alertshow = async() => {
 		// props.Alert("Update Successfully", "success");
-		await swal("Good job!", "You clicked the button!", "success");
+		await swal("Alert!", "Discount coupon can not work", "error");
 		// if(data){
 		// navigate("/")}
 	}

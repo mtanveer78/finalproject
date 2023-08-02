@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import {useLocation} from 'react-router-dom'
 import Footer from './Footer'
 import Header from './Header'
 // import "../assets/css/animate.css"
@@ -15,6 +16,8 @@ import Sidebar from './Sidebar'
 
 
 const Userlayout = ({ children }) => {
+  let location = useLocation();
+  const path = location.pathname;
   
   useEffect(() => {
     /* eslint-disable-next-line */
@@ -26,7 +29,8 @@ const Userlayout = ({ children }) => {
     <>
       {/* <iframe> */}
         <Header />
-        <Sidebar />
+        {path === '/' ?<Sidebar />:""}
+      
         <main className="main"> {children} </main>
         <Footer />
       {/* </iframe> */}
